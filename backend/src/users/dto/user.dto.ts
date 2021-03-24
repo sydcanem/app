@@ -1,9 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
-import { IUser } from './user.interface';
 
-export class CreateUserDto implements IUser {
+export class CreateUserDto {
   @ApiProperty({
     required: true,
     type: String,

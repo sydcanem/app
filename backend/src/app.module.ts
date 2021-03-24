@@ -21,7 +21,8 @@ import { AppController } from './app.controller';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [User, Product, CartProduct, Cart],
-      synchronize: true, // never use in production
+      synchronize: true, // never use in production,
+      logging: ["query", "error"],
     }),
     ProductsModule,
     CartModule,

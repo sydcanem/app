@@ -3,10 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Param,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateUserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 
@@ -21,8 +23,9 @@ export class UsersController {
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id);
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  findOne(@Request() req) {
+    return this.usersService.findOne(req.user.id);
   }
 }
