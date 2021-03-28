@@ -8,7 +8,6 @@ import { Product } from './products/entities/product.entity';
 import { Cart, CartProduct } from './cart/entities/cart.entity';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -29,6 +28,5 @@ import { AppController } from './app.controller';
     UsersModule,
     AuthModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}
