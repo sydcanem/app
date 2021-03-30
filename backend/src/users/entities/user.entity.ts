@@ -18,7 +18,7 @@ export class User implements IUser {
   username: string;
 
   @Exclude()
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @BeforeInsert()
