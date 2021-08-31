@@ -1,10 +1,9 @@
 import useSWR, { mutate } from 'swr';
-import fetch from 'unfetch';
-import { API_ENDPOINT } from '../config';
+import { agent } from '../agent';
 import { Cart, Product } from '../types';
 
 const fetcher = (url: string, options?: Object) =>
-  fetch(`${API_ENDPOINT}${url}`, options).then(r => r.json());
+  agent(url, options).then(r => r.data);
 
 export const useProducts = () => {
   return useSWR<Product[]>('/products', fetcher);
@@ -26,7 +25,7 @@ export const requestUpdateProductQuantity = async (
     headers: { 
       'Content-type': 'application/json'
     }, 
-    body: JSON.stringify({ cartId, productId, quantity })
+    data: JSON.stringify({ cartId, productId, quantity })
   });
   return mutate(`/cart/${cartId}`, update, false);
 };
