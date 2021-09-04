@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { SWRConfig } from 'swr';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <SWRConfig
+    value={{
+      revalidateIfStale: false
+    }}
+  >
+     <React.StrictMode>
     <App />
-  </React.StrictMode>,
+    </React.StrictMode>
+  </SWRConfig>,
   document.getElementById('root')
 );
 
