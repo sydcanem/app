@@ -4,7 +4,7 @@ import { API_ENDPOINT } from './config';
 
 MimicClient.init({
   axios,
-  key: 'initial'
+  key: 'initial',
 });
 
 export const agent = axios.create({ baseURL: API_ENDPOINT });

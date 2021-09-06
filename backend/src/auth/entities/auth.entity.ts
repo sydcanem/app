@@ -1,7 +1,15 @@
 import * as argon2 from 'argon2';
 import { User } from '../../users/entities/user.entity';
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
-import { IAuth } from "../interfaces/auth.interface";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { IAuth } from '../interfaces/auth.interface';
 
 @Entity()
 export class Auth implements IAuth {
@@ -17,7 +25,7 @@ export class Auth implements IAuth {
   @PrimaryColumn()
   userId: string;
 
-  @ManyToOne(type => User)
+  @ManyToOne((type) => User)
   @JoinColumn({
     name: 'userId',
     referencedColumnName: 'id',

@@ -36,7 +36,7 @@ export class UsersService {
   findByUsername(username: string): Promise<User> {
     return this.usersRepository.findOne({
       where: { username },
-      select: ['id', 'username', 'password']
+      select: ['id', 'username', 'password'],
     });
   }
 }

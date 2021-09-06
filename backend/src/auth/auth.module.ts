@@ -18,8 +18,8 @@ import { User } from 'src/users/entities/user.entity';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { 
-        expiresIn: jwtConstants.expiresIn
+      signOptions: {
+        expiresIn: jwtConstants.expiresIn,
       },
     }),
     TypeOrmModule.forFeature([Auth, User]),

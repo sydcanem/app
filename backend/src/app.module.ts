@@ -22,7 +22,7 @@ import { Auth } from './auth/entities/auth.entity';
       database: process.env.DB_DATABASE,
       entities: [User, Product, CartProduct, Cart, Auth],
       synchronize: true, // never use in production,
-      logging: ["query", "error"],
+      logging: ['query', 'error'],
     }),
     ProductsModule,
     CartModule,

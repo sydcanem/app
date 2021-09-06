@@ -16,5 +16,5 @@ export interface CartProduct {
 
 export interface Cart {
   id: string;
-  products: CartProduct[]
+  products: CartProduct[];
 }

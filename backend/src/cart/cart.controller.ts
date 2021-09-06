@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Put,
-  Param,
-  Delete,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CartService } from './cart.service';
 import { CreateCartProductDto, UpdateCartProductDto } from './dto/cart.dto';
@@ -36,10 +27,7 @@ export class CartController {
   @ApiOperation({
     summary: 'Adds a product in the cart by id',
   })
-  update(
-    @Param('id') id: string,
-    @Body() createCartProduct: CreateCartProductDto,
-  ) {
+  update(@Param('id') id: string, @Body() createCartProduct: CreateCartProductDto) {
     return this.cartService.addProductToCart(id, createCartProduct);
   }
 

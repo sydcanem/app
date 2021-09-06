@@ -29,13 +29,9 @@ export class CartService {
       throw new NotFoundException(`Cart with id ${id} not found`);
     }
 
-    const product = await this.productRepository.findOne(
-      createCartProduct.productId,
-    );
+    const product = await this.productRepository.findOne(createCartProduct.productId);
     if (!product) {
-      throw new NotFoundException(
-        `Product with id ${createCartProduct.productId} not found`,
-      );
+      throw new NotFoundException(`Product with id ${createCartProduct.productId} not found`);
     }
 
     await getConnection()
@@ -43,9 +39,7 @@ export class CartService {
       .insert()
       .into(CartProduct)
       .values({ cartId: id, ...createCartProduct })
-      .onConflict(
-        `("cartId", "productId") DO UPDATE SET "quantity" = :quantity`,
-      )
+      .onConflict(`("cartId", "productId") DO UPDATE SET "quantity" = :quantity`)
       .setParameter('quantity', createCartProduct.quantity)
       .execute();
 
