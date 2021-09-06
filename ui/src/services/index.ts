@@ -1,6 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import { agent } from '../agent';
-import { Cart, Product } from '../types';
+import { Cart, LoginRequest, LoginResponse, Product } from '../types';
 
 const fetcher = (url: string, options?: Object) => agent(url, options).then((r) => r.data);
 
@@ -29,4 +29,12 @@ export const requestUpdateProductQuantity = async (
     data: JSON.stringify({ cartId, productId, quantity }),
   });
   return mutate(`/cart/${cartId}`, update, false);
+};
+
+export const login = async (username: string, password: string): Promise<LoginResponse> => {
+  const response = await agent.post<LoginResponse>('/auth/login', {
+    username,
+    password,
+  });
+  return response.data;
 };

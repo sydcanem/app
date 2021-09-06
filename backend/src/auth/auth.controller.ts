@@ -20,8 +20,9 @@ export class AuthController {
     res.cookie('refresh', refreshToken, {
       maxAge: jwtConstants.refreshMaxAge,
       path: '/auth/refresh',
-      domain: '/',
+      domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
+      sameSite: 'strict',
     });
 
     res.status(200).send({ token });

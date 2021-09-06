@@ -18,3 +18,12 @@ export interface Cart {
   id: string;
   products: CartProduct[];
 }
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+}

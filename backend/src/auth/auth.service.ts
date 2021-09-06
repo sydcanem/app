@@ -56,7 +56,8 @@ export class AuthService {
 
   async returnUserIfRefreshTokenMatch(user: IUser, refreshToken: string) {
     const auth: IAuth = await this.authRepository.findOne({
-      where: { userId: user.id },
+      where: { userId: user.id, blacklisted: false },
+      order: { dateAdded: 'DESC' },
       relations: ['user'],
     });
 

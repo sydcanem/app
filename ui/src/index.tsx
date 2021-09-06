@@ -1,20 +1,10 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { SWRConfig } from 'swr';
+import Root from './root';
 
 ReactDOM.render(
-  <SWRConfig
-    value={{
-      revalidateIfStale: false
-    }}
-  >
-     <React.StrictMode>
-    <App />
-    </React.StrictMode>
-  </SWRConfig>,
+  <Root />,
   document.getElementById('root')
 );
 
