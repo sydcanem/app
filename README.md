@@ -5,16 +5,13 @@ A simple shopping list application made with NestJS
 ## Running the API
 
 ```bash
+# start postgresql container
+$> docker-compose up -d
+
 $> cd backend
 
-# start postgresql container
-$backend> docker-compose up -d
-
 # run migrations for dummy products
-$backend> npx ts-node ./node_modules/typeorm/cli.js migration:run
-
-# run the app
-$backend> yarn run start
+$> npx ts-node ./node_modules/typeorm/cli.js migration:run
 ```
 
 Visit http://localhost:4000/api for the Swagger documentation to test

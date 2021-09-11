@@ -1,6 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import { agent } from '../agent';
-import { Cart, LoginRequest, LoginResponse, Product } from '../types';
+import { Cart, LoginResponse, Product } from '../types';
 
 const fetcher = (url: string, options?: Object) => agent(url, options).then((r) => r.data);
 

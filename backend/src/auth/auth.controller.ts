@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { JwtRefreshAuthGuard } from './jwt-refresh-auth.guard';
-import { jwtConstants } from './constants';
+import { jwtConstants, refreshCookieOpts } from './constants';
 
 @Controller('auth')
 export class AuthController {
@@ -17,14 +17,7 @@ export class AuthController {
 
     await this.authService.saveRefreshTokenForUser(req.user, refreshToken);
 
-    res.cookie('refresh', refreshToken, {
-      maxAge: jwtConstants.refreshMaxAge,
-      path: '/auth/refresh',
-      domain: process.env.COOKIE_DOMAIN,
-      httpOnly: true,
-      sameSite: 'strict',
-    });
-
+    res.cookie('refresh', refreshToken, refreshCookieOpts);
     res.status(200).send({ token });
   }
 

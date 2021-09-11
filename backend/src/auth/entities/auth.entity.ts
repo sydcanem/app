@@ -16,27 +16,28 @@ export class Auth implements IAuth {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ name: 'refresh_token' })
   refreshToken: string;
 
   @Column({ default: false })
   blacklisted: boolean;
 
-  @PrimaryColumn()
+  @PrimaryColumn({ name: 'user_id' })
   userId: string;
 
   @ManyToOne((type) => User)
   @JoinColumn({
-    name: 'userId',
+    name: 'user_id',
     referencedColumnName: 'id',
   })
   user: User;
 
   @Column({
-    type: 'time with time zone',
+    name: 'date_added',
+    type: 'timestamp with time zone',
     default: 'now()',
   })
-  dateAdded: string;
+  dateAdded: Date;
 
   @BeforeInsert()
   async hashRefreshToken() {

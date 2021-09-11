@@ -39,7 +39,7 @@ export class CartService {
       .insert()
       .into(CartProduct)
       .values({ cartId: id, ...createCartProduct })
-      .onConflict(`("cartId", "productId") DO UPDATE SET "quantity" = :quantity`)
+      .onConflict(`("cart_id", "product_id") DO UPDATE SET "quantity" = :quantity`)
       .setParameter('quantity', createCartProduct.quantity)
       .execute();
 

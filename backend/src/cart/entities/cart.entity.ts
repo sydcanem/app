@@ -14,10 +14,10 @@ import { Product } from '../../products/entities/product.entity';
 @Entity()
 @Index(['productId', 'cartId'], { unique: true })
 export class CartProduct implements ICartProduct {
-  @PrimaryColumn()
+  @PrimaryColumn({ name: 'product_id' })
   @ManyToOne((type) => Product)
   @JoinColumn({
-    name: 'productId',
+    name: 'product_id',
     referencedColumnName: 'id',
   })
   productId: string;
@@ -25,10 +25,10 @@ export class CartProduct implements ICartProduct {
   @Column()
   quantity: number;
 
-  @PrimaryColumn()
+  @PrimaryColumn({ name: 'cart_id' })
   @ManyToOne((type) => Cart)
   @JoinColumn({
-    name: 'cartId',
+    name: 'cart_id',
     referencedColumnName: 'id',
   })
   cartId: string;

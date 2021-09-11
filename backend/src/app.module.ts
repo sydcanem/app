@@ -12,7 +12,9 @@ import { Auth } from './auth/entities/auth.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: [`.${process.env.CONFIG_ENV}.env`, '.env']
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,

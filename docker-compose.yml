@@ -1,0 +1,22 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+  backend:
+    image: app/backend
+    depends_on:
+      - "postgres"
+    links:
+      - "postgres"
+    ports:
+      - "4000:4000"
+    environment: 
+      CONFIG_ENV: "docker"
+    command: yarn start:dev
