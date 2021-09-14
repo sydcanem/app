@@ -12,6 +12,14 @@ export const useCartProducts = (cartId: string | null) => {
   return useSWR<Cart>(cartId ? `/cart/${cartId}` : null, fetcher);
 };
 
+export const useCart = () => {
+  return useSWR<Cart>('/cart', fetcher);
+};
+
+export const getUserCarts = () => {
+  return fetcher('/cart');
+};
+
 export const requestCreateCart = async () => {
   return fetcher('/cart', { method: 'POST' });
 };

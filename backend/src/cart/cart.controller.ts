@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CartService } from './cart.service';
@@ -13,8 +13,16 @@ export class CartController {
   @ApiOperation({
     summary: 'Creates a new cart',
   })
-  create() {
-    return this.cartService.create();
+  create(@Req() req) {
+    return this.cartService.create(req.user);
+  }
+
+  @Get()
+  @ApiOperation({
+    summary: 'Get user cart',
+  })
+  findByUser(@Req() req) {
+    return this.cartService.findByUserId(req.user.id);
   }
 
   @Get(':id')

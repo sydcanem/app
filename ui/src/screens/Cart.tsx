@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductList } from '../components/ProductList';
 import { SummaryFooter } from '../components/SummaryFooter';
-import { requestCreateCart } from '../services';
+import { getUserCarts, requestCreateCart } from '../services';
 
 export const Cart = () => {
   const [ cartId, setCartId ] = useState<string | null>(null);
 
   useEffect(() => {
     const initCart = async (id: string | null) => {
+      const userCarts = await getUserCarts();
       if (!id) {
         const resp = await requestCreateCart();
         if (resp && resp.id) {

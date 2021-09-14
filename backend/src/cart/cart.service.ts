@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from 'src/products/entities/product.entity';
+import { User } from 'src/users/entities/user.entity';
 import { getConnection, Repository } from 'typeorm';
 import { CreateCartProductDto } from './dto/cart.dto';
 import { Cart, CartProduct } from './entities/cart.entity';
@@ -18,8 +19,10 @@ export class CartService {
     private productRepository: Repository<Product>,
   ) {}
 
-  create() {
-    const cart = this.cartRepository.create();
+  create(user: User) {
+    const cart = this.cartRepository.create({
+      userId: user.id,
+    });
     return this.cartRepository.save(cart);
   }
 
@@ -53,6 +56,13 @@ export class CartService {
     return this.cartRepository.findOne({
       where: { id },
       relations: ['products'],
+    });
+  }
+
+  findByUserId(userId: string) {
+    return this.cartRepository.findOne({
+      where: { userId },
+      order: { dateAdded: 'DESC' },
     });
   }
 

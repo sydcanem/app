@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { ICart, ICartProduct } from '../dto/cart.interface';
 import { Product } from '../../products/entities/product.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 @Index(['productId', 'cartId'], { unique: true })
@@ -26,7 +27,7 @@ export class CartProduct implements ICartProduct {
   quantity: number;
 
   @PrimaryColumn({ name: 'cart_id' })
-  @ManyToOne((type) => Cart)
+  @ManyToOne(() => Cart)
   @JoinColumn({
     name: 'cart_id',
     referencedColumnName: 'id',
@@ -39,6 +40,20 @@ export class Cart implements ICart {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany((type) => CartProduct, (products) => products.cartId)
+  @OneToMany(() => CartProduct, (products) => products.cartId)
   products: CartProduct[];
+
+  @ManyToOne(() => User)
+  @JoinColumn({
+    name: 'user_id',
+    referencedColumnName: 'id',
+  })
+  userId: string;
+
+  @Column({
+    name: 'date_added',
+    type: 'timestamp with time zone',
+    default: 'now()',
+  })
+  dateAdded: Date;
 }
